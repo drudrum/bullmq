@@ -788,7 +788,7 @@ will never work with more accuracy than 1ms. */
       this.drained = false;
       const job = this.createJob(jobData, jobId);
       job.token = token;
-      
+
       // Add next scheduled job if necessary.
       if (job.opts.repeat && !job.nextRepeatableJobId) {
         const repeatJobKey = job.repeatJobKey || job.opts.repeat.key; 
