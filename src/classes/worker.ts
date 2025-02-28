@@ -788,14 +788,15 @@ will never work with more accuracy than 1ms. */
       this.drained = false;
       const job = this.createJob(jobData, jobId);
       job.token = token;
-
+      
       // Add next scheduled job if necessary.
       if (job.opts.repeat && !job.nextRepeatableJobId) {
+        const repeatJobKey = job.repeatJobKey || job.opts.repeat.key; 
         // Use new job scheduler if possible
-        if (job.repeatJobKey) {
+        if (repeatJobKey) {
           const jobScheduler = await this.jobScheduler;
           await jobScheduler.upsertJobScheduler(
-            job.repeatJobKey,
+            repeatJobKey,
             job.opts.repeat,
             job.name,
             job.data,
